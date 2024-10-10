@@ -37,28 +37,39 @@ class  _LoginpageState extends State<Loginpage>{
         title: Text("Login Page Example"),
       ),
       body: Center(
-        child: Column(
-          children: [
-            Text("Username"),
-            SizedBox(height: 20,),
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(border: OutlineInputBorder()),
-            ),
-            SizedBox(height: 50,),
-            Text("password"),
-            SizedBox(height: 20,),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(border: OutlineInputBorder()),),
-
-            SizedBox(height: 30,),
-            ElevatedButton(onPressed: (){
-             _login();
-            },
-             child: Text("Login")),
-             Text(_loginmessage),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Text("Username"),
+              SizedBox(height: 20,),
+              SizedBox(
+                height: 100,
+                width: 300,
+                child: TextField(
+                  controller: usernameController,
+                  decoration: InputDecoration(border: OutlineInputBorder()),
+                ),
+              ),
+              SizedBox(height: 50,),
+              Text("password"),
+              SizedBox(height: 20,),
+              SizedBox(
+                height: 100,
+                width: 300,
+                child: TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(border: OutlineInputBorder()),),
+              ),
+          
+              SizedBox(height: 30,),
+              ElevatedButton(onPressed: (){
+               _login();
+              },
+               child: Text("Login")),
+               Text(_loginmessage),
+            ],
+          ),
         ),
       ),
       

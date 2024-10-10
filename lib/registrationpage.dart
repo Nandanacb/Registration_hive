@@ -24,32 +24,43 @@ class _RegistrationpageState extends State<Registrationpage>{
       appBar: AppBar(
         title: Text("Registration page example"),
       ),
-      body: Center(child: Column(
-        children: [
-          SizedBox(height: 30,),
-          Text("Username"),
-          SizedBox(height: 20),
-          TextField(
-            controller:usernameController,
-            decoration: InputDecoration(border: OutlineInputBorder()),),
-           SizedBox(height: 20),
-            Text("Password"),
+      body: Center(child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            SizedBox(height: 30,),
+            Text("Username"),
             SizedBox(height: 20),
-           TextField(
-            controller: passwordController,
-            decoration: InputDecoration(border: OutlineInputBorder()),),
-           SizedBox(height: 50),
-           ElevatedButton(onPressed: (){
-            setState(() {
-              box.put('username', usernameController.text);
-               box.put('password', usernameController.text);
-               
-
-            });
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> Loginpage()));
-            
-           }, child: Text("Register")),
-        ],
+            SizedBox(
+              height: 100,
+              width: 300,
+              child: TextField(
+                controller:usernameController,
+                decoration: InputDecoration(border: OutlineInputBorder()),),
+            ),
+             SizedBox(height: 20),
+              Text("Password"),
+              SizedBox(height: 20),
+             SizedBox(
+              height: 100,
+              width: 300,
+               child: TextField(
+                controller: passwordController,
+                decoration: InputDecoration(border: OutlineInputBorder()),),
+             ),
+             SizedBox(height: 50),
+             ElevatedButton(onPressed: (){
+              setState(() {
+                box.put('username', usernameController.text);
+                 box.put('password', passwordController.text);
+                 
+        
+              });
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> Loginpage()));
+              
+             }, child: Text("Register")),
+          ],
+        ),
       ),),
     );
   }
