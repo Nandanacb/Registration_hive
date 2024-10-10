@@ -1,45 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_registration_screen/loginpage.dart';
 
 class Registrationpage extends StatefulWidget{
+ 
+  @override
+  State<Registrationpage> createState()=> _RegistrationpageState();
+}
+class _RegistrationpageState extends State<Registrationpage>{
+ 
+
   late Box box;
-  String? username;
-  int? password;
+   TextEditingController usernameController =TextEditingController();
+  TextEditingController passwordController =TextEditingController();
+  
   @override
   void initState(){
     super.initState();
-    box=Hive.box('mybox');
+    box=Hive.box('mysterybox');
   }
-  State<Registrationpage> createState()=> _RegistrationpageState();
-}
-
-class _RegistrationpageState extends State<Registrationpage>{
-  @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text("Registration Page Example"),
+        title: Text("Registration page example"),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text("Username"),
-            SizedBox(height: 20,),
-            TextField(
-              decoration: InputDecoration(border: OutlineInputBorder()),
-            ),
-            SizedBox(height: 50,),
-            Text("password"),
-            SizedBox(height: 20,),
-            TextField(decoration: InputDecoration(border: OutlineInputBorder()),),
+      body: Center(child: Column(
+        children: [
+          SizedBox(height: 30,),
+          Text("Username"),
+          SizedBox(height: 20),
+          TextField(
+            controller:usernameController,
+            decoration: InputDecoration(border: OutlineInputBorder()),),
+           SizedBox(height: 20),
+            Text("Password"),
+            SizedBox(height: 20),
+           TextField(
+            controller: passwordController,
+            decoration: InputDecoration(border: OutlineInputBorder()),),
+           SizedBox(height: 50),
+           ElevatedButton(onPressed: (){
+            setState(() {
+              box.put('username', usernameController.text);
+               box.put('password', usernameController.text);
+               
 
-            SizedBox(height: 30,),
-            ElevatedButton(onPressed: (){
-
-            }, child: Text("Register")),
-          ],
-        ),
-      ),
+            });
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Loginpage()));
+            
+           }, child: Text("Register")),
+        ],
+      ),),
     );
   }
 }

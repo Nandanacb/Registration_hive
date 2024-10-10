@@ -6,7 +6,7 @@ import 'package:hive_registration_screen/registrationpage.dart';
 
 void main() async{
   await Hive.initFlutter();
-  var box=await Hive.openBox('mybox');
+  var box=await Hive.openBox('mysterybox');
   runApp(const MyApp());
 }
 

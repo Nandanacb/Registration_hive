@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class Loginpage extends StatefulWidget{
   @override
@@ -6,6 +7,29 @@ class Loginpage extends StatefulWidget{
 }
 
 class  _LoginpageState extends State<Loginpage>{
+  late Box box;
+   TextEditingController usernameController =TextEditingController();
+  TextEditingController passwordController =TextEditingController();
+  String _loginmessage="";
+  @override
+  void initState(){
+    super.initState();
+    box=Hive.box('mysterybox');
+  }
+  void _login(){
+   setState(() {
+     String storedusername=box.get('username');
+     String storedpassword=box.get('password');
+
+     if(storedusername==usernameController.text && 
+     storedpassword==passwordController.text){
+      _loginmessage="Login successful";
+     }
+     else{
+      _loginmessage="invalid credentials";
+     }
+   });
+  }
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -18,18 +42,26 @@ class  _LoginpageState extends State<Loginpage>{
             Text("Username"),
             SizedBox(height: 20,),
             TextField(
+              controller: usernameController,
               decoration: InputDecoration(border: OutlineInputBorder()),
             ),
             SizedBox(height: 50,),
             Text("password"),
             SizedBox(height: 20,),
-            TextField(decoration: InputDecoration(border: OutlineInputBorder()),),
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(border: OutlineInputBorder()),),
 
             SizedBox(height: 30,),
-            ElevatedButton(onPressed: (){}, child: Text("Login")),
+            ElevatedButton(onPressed: (){
+             _login();
+            },
+             child: Text("Login")),
+             Text(_loginmessage),
           ],
         ),
       ),
+      
     );
   }
 }
